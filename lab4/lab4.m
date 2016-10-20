@@ -10,7 +10,7 @@ t = linspace(0,max_time,num_samples);
 
 s = randn(num_samples, nInputs); % noise
 cut_off = 0.1;
-[h_b, h_a] = butter(7,cut_off); %sinc(t / sampling_frequency);
+[h_b, h_a] = butter(7,2*cut_off); %sinc(t / sampling_frequency);
 x = filter(h_b,h_a,s); % filtered noise
 
 %% functions
