@@ -52,17 +52,35 @@ P2 = psd(y2);
 P3 = psd(y3);
 
 figure(1)
-A = 0.1;
-subplot(2,2,1); hold on; plot(theta, log(A + fftshift(RX)),'r'); plot(theta, log(A + fftshift(PX)),'c'); title('Input');
-subplot(2,2,2); hold on; plot(theta, log(A + fftshift(R1)),'r'); plot(theta, log(A + fftshift(P1)),'c'); title('Squarer');
-subplot(2,2,3); hold on; plot(theta, log(A + fftshift(R2)),'r'); plot(theta, log(A + fftshift(P2)),'c'); title('Rectifier');
-subplot(2,2,4); hold on; plot(theta, log(A + fftshift(R3)),'r'); plot(theta, log(A + fftshift(P3)),'c'); title('AM-SC');
+pfac = 1;
+subplot(2,2,1); hold on; plot(theta, fftshift(RX).^pfac,'r'); plot(theta, fftshift(PX).^pfac,'c'); title('Input'); xlabel('Normalized frequency'); ylabel('pow(PSD, 0.1)'); 
+subplot(2,2,2); hold on; plot(theta, fftshift(R1).^pfac,'r'); plot(theta, fftshift(P1).^pfac,'c'); title('Squarer'); xlabel('Normalized frequency'); ylabel('pow(PSD, 0.1)'); 
+subplot(2,2,3); hold on; plot(theta, fftshift(R2).^pfac,'r'); plot(theta, fftshift(P2).^pfac,'c'); title('Rectifier'); xlabel('Normalized frequency'); ylabel('pow(PSD, 0.1)'); 
+subplot(2,2,4); hold on; plot(theta, fftshift(R3).^pfac,'r'); plot(theta, fftshift(P3).^pfac,'c'); title('AM-SC'); xlabel('Normalized frequency'); ylabel('pow(PSD, 0.1)'); 
+
+
+RX = RX(2:end);
+R1 = R1(2:end);
+R2 = R2(2:end);
+R3 = R3(2:end);
+PX = PX(2:end);
+P1 = P1(2:end);
+P2 = P2(2:end);
+P3 = P3(2:end);
+theta = theta(2:end);
+figure(2)
+pfac = 1;
+subplot(2,2,1); hold on; plot(theta, fftshift(RX).^pfac,'r'); plot(theta, fftshift(PX).^pfac,'c'); title('Input'); xlabel('Normalized frequency'); ylabel('pow(PSD, 0.1)'); 
+subplot(2,2,2); hold on; plot(theta, fftshift(R1).^pfac,'r'); plot(theta, fftshift(P1).^pfac,'c'); title('Squarer'); xlabel('Normalized frequency'); ylabel('pow(PSD, 0.1)'); 
+subplot(2,2,3); hold on; plot(theta, fftshift(R2).^pfac,'r'); plot(theta, fftshift(P2).^pfac,'c'); title('Rectifier'); xlabel('Normalized frequency'); ylabel('pow(PSD, 0.1)'); 
+subplot(2,2,4); hold on; plot(theta, fftshift(R3).^pfac,'r'); plot(theta, fftshift(P3).^pfac,'c'); title('AM-SC'); xlabel('Normalized frequency'); ylabel('pow(PSD, 0.1)'); 
+
 % figure(1);
 % title('theoretical psds')
-% subplot(2,2,1); plot(theta,fftshift(RX)); title('Input PSD');
-% subplot(2,2,2); plot(theta,fftshift(R1)); title('Squarer');
-% subplot(2,2,3); plot(theta,fftshift(R2)); title('Rectifier');
-% subplot(2,2,4); plot(theta,fftshift(R3)); title('AM-SC');
+%subplot(2,2,1); plot(theta,fftshift(RX).^(pfac)); title('Input'); xlabel('Normalized frequency'); ylabel('PSD'); 
+%subplot(2,2,2); plot(theta,fftshift(R1).^(pfac)); title('Squarer'); xlabel('Normalized frequency'); ylabel('PSD'); 
+%subplot(2,2,3); plot(theta,fftshift(R2).^(pfac)); title('Rectifier'); xlabel('Normalized frequency'); ylabel('PSD'); 
+%subplot(2,2,4); plot(theta,fftshift(R3).^(pfac)); title('AM-SC'); xlabel('Normalized frequency'); ylabel('PSD'); 
 % 
 % RX(1) = [];
 % R1(1) = [];
@@ -105,7 +123,7 @@ subplot(2,2,4); hold on; plot(theta, log(A + fftshift(R3)),'r'); plot(theta, log
 
 %% PDF estimations (ampltitude hist)
 figure(5)
-subplot(2,2,1); hist(x(:),100); title('Histogram of input')
-subplot(2,2,2); hist(y1(:),100); title('Histogram of squarer')
-subplot(2,2,3); hist(y2(:),100); title('Histogram of rectifier')
-subplot(2,2,4); hist(y3(:),100); title('Histogram of AM-SC')
+subplot(2,2,1); hist(x(:),100); title('Histogram of input'); xlabel('Amplitude'); ylabel('Number of samples');
+subplot(2,2,2); hist(y1(:),100); title('Histogram of squarer'); xlabel('Amplitude'); ylabel('Number of samples');
+subplot(2,2,3); hist(y2(:),100); title('Histogram of rectifier'); xlabel('Amplitude'); ylabel('Number of samples');
+subplot(2,2,4); hist(y3(:),100); title('Histogram of AM-SC'); xlabel('Amplitude'); ylabel('Number of samples');
